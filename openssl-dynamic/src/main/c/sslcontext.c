@@ -1561,10 +1561,6 @@ static int cert_requested(SSL* ssl, X509** x509Out, EVP_PKEY** pkeyOut) {
     }
 
     cert = sk_X509_value(chain, 0);
-    // Increment the reference count as we already set the chain via SSL_set0_chain(...) and using a cert out of it.
-    if (tcn_X509_up_ref(cert) <= 0) {
-        goto fail;
-    }
     *x509Out = cert;
     *pkeyOut = pkey;
 
